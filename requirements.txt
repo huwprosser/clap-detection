@@ -1,0 +1,5 @@
+sounddevice
+scipy
+numpy
+librosa
+pydub
