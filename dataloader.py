@@ -5,12 +5,14 @@ from torch.utils.data import Dataset
 from torchvision.transforms import Resize
 import torchaudio.transforms as T
 
+
 def get_wav_files(directory):
     return [
         os.path.join(directory, filename)
         for filename in os.listdir(directory)
         if filename.endswith(".wav")
     ]
+
 
 class AudioDataset(Dataset):
     def __init__(self, noise_dir, clap_dir):
@@ -25,7 +27,7 @@ class AudioDataset(Dataset):
     def __len__(self):
         return len(self.file_list)
 
-    def __getitem__(self, idx, n_mels=128, n_fft=400, hop_length=200):
+    def __getitem__(self, idx, n_mels=64, n_fft=400, hop_length=200):
         waveform, sample_rate = torchaudio.load(self.file_list[idx])
         spec = T.MelSpectrogram(
             sample_rate=sample_rate,
@@ -38,4 +40,3 @@ class AudioDataset(Dataset):
         spec = (spec - spec.mean()) / spec.std()  # normalize the spectrogram
         label = self.labels[idx]
         return spec, torch.tensor(label)
-

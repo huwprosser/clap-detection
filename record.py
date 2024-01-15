@@ -6,7 +6,7 @@ from scipy.io.wavfile import write
 
 # Set the duration of each chunk
 chunk_duration = 1  # in seconds
-num_samples = 100
+num_samples = 300
 sample_rate = 44100  # in Hz
 dtype = np.int16
 interval = 1  # in seconds
@@ -18,7 +18,7 @@ chunk_samples = int(chunk_duration * sample_rate)
 stream = sd.InputStream(callback=None, channels=1, samplerate=sample_rate, dtype=dtype)
 
 # Define the directory where the chunks will be saved
-directory = "data/claps"
+directory = "data/noise2"
 
 # Create the directory if it doesn't exist
 if not os.path.exists(directory):
@@ -35,7 +35,7 @@ with stream:
         chunk, overflowed = stream.read(chunk_samples)
 
         # Save the chunk to a WAV file in the specified directory
-        filename = os.path.join(directory, f"chunk_{i}.wav")
+        filename = os.path.join(directory, f"bg_{i}.wav")
         write(filename, sample_rate, chunk)
 
         # Wait for the next chunk
