@@ -4,3 +4,5 @@ A convolutional neural network that classifies audio samples as MelSpectograms. 
 
 
 Watch the stream here: https://www.youtube.com/watch?v=OBodG-6YEMo
+
+Dataset: https://huggingface.co/datasets/dvncoder/clap-detection
